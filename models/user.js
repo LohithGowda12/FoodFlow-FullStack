@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
             message:'Passwords are not the same'
         }
     },
-    PhoneNumber:{
+    phoneNumber:{
         type:String,
         required:[true,'Please enter your phone number'],
         match:[/^[0-9]{10}$/,'Please enter a valid phone number']
@@ -82,15 +82,17 @@ userSchema.methods.correctPassword=async function(
 //if yes, the old token is invalid and user must log in again
 userSchema.methods.changedPasswordAfter=function(JWTTimestamp){
     if(this.passwordChangedAt){
-        const changedTimestamp=parseInt(this.passwordChangedAt.getTime()/1000,10)
-        return JWTTimestamp<changedTimestamp
+        const changedTimestamp=parseInt(
+            this.passwordChangedAt.getTime()/1000,10
+        )
+        return JWTTimestamp < changedTimestamp
     }
     return false;
 }
 
 //coustomer method to generate password reset token
 
-userSchema.methods.getJWTTOKEN=function(){
+userSchema.methods.getJWTToken=function(){
     return jwt.sign(
         {id:this._id},
         process.env.JWT_SECRET,

@@ -8,7 +8,7 @@ const cloudinary=require("../config/cloudinary")
 
 //signup
 exports.signup=catchAsyncErrors(async(req,res,next)=>{
-    const {name,email,password,passwordConfirm,PhoneNumber}=req.body;
+    const {name,email,password,passwordConfirm,phoneNumber}=req.body;
 
     let avatar=[]
     //avtar not provided
@@ -35,7 +35,7 @@ exports.signup=catchAsyncErrors(async(req,res,next)=>{
         email,
         password,
         passwordConfirm,
-        PhoneNumber,
+        phoneNumber,
         avatar
     })
     sendToken(user,200, res)
@@ -43,17 +43,23 @@ exports.signup=catchAsyncErrors(async(req,res,next)=>{
 
 
 //login
-//exports.login = catchAsyncError(async(req,res,next)=>{
-  //  const {email,password}=req.body;
+exports.login = catchAsyncErrors(async(req,res,next)=>{
+    const {email,password}=req.body;
 
-    //if(!email || !password){
-      //  return next(new ErrorHandler("Please enter email id and password", 400))
-    //}
-    //const user = await User.findOne({email}).select("+password")
+    if(!email || !password){
+        return next(new ErrorHandler("Please enter email id and password", 400))
+    }
+    const user = await User.findOne({email}).select("+password")
 
-    //if(!user){
-      //  return next(new ErrorHandler("Invalid email or password", 401))
-    //}
+    if(!user){
+        return next(new ErrorHandler("Invalid email or password", 401))
+    }
+    
+    const isPasswordMatched=await user.correctPassword(password,user.password)
+    if(!isPasswordMatched){
+        return next(new ErrorHandler("Invalid email or password", 401))
+    }
 
-
-//})
+    sendToken(user,200,res)
+    
+})
