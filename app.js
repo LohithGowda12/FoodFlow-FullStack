@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json()
 )
 app.use("/api/v1/users", auth)
-app.use("/api/v1/eats/stores", restaurant)
+app.use("/api/v1/restaurants", restaurant)
 
 
 module.exports=app
