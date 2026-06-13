@@ -19,7 +19,7 @@ exports.signup=catchAsyncErrors(async(req,res,next)=>{
         }
     }
     else{
-        const result=await cloudinary.UploadStream(req.body.avatar,{
+        const result= await cloudinary.UploadStream(req.body.avatar,{
             folder:"avatar",
             width:150,
             crop:"scale",
@@ -38,7 +38,7 @@ exports.signup=catchAsyncErrors(async(req,res,next)=>{
         phoneNumber,
         avatar
     })
-    sendToken(user,200, res)
+    sendToken(user, 200, res)
 })
 
 
@@ -60,6 +60,6 @@ exports.login = catchAsyncErrors(async(req,res,next)=>{
         return next(new ErrorHandler("Invalid email or password", 401))
     }
 
-    sendToken(user,200,res)
+    sendToken(user, 200, res)
     
 })

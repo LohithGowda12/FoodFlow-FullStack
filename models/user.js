@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     name:{
         type:String,
         required:[true,'Please enter your name'],
-        maxLength:[30,'Your name cannot exceed 30 characters']
+        maxlength:[30,'Your name cannot exceed 30 characters']
 
     },
     email:{
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,'Please enter your password'],
-        minLength:[6,'Your password must be at least 6 characters long'],
+        minlength:[6,'Your password must be at least 6 characters long'],
         select:false
     },
     passwordConfirm:{
@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     },
     phoneNumber:{
         type:String,
-        required:[true,'Please enter your phone number'],
+        required:true,
         match:[/^[0-9]{10}$/,'Please enter a valid phone number']
     },
     role:{
@@ -66,7 +66,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save',async function(){
     if(!this.isModified("password")) return;
-    this.password=await bcrypt.hash(this.password,10)
+    this.password=await bcrypt.hash(this.password,12)
     this.passwordConfirm=undefined
 
 })
@@ -83,7 +83,7 @@ userSchema.methods.correctPassword=async function(
 userSchema.methods.changedPasswordAfter=function(JWTTimestamp){
     if(this.passwordChangedAt){
         const changedTimestamp=parseInt(
-            this.passwordChangedAt.getTime()/1000,10
+            this.passwordChangedAt.getTime()/1000, 10
         )
         return JWTTimestamp < changedTimestamp
     }
@@ -100,4 +100,4 @@ userSchema.methods.getJWTToken=function(){
     )
 }
 
-module.exports=mongoose.model("User",userSchema)
+module.exports=mongoose.model("User", userSchema)
