@@ -3,7 +3,7 @@ const mongoose=require('mongoose')
 const foodSchema=new mongoose.Schema({
     name:{
         type:String,
-        required:[true,'Please enter the food name'],
+        required:[true,'Please enter food name'],
         trim:true,
         maxlength:[100,'Food name cannot exceed 100 characters']
     },
