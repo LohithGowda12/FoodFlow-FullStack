@@ -13,7 +13,7 @@ exports.processPayment = catchAsynchErrors(async(req,res,next)=>{
     console.log(req.body)
 
     //create a stripe checkout session
-    const session = await stripe.checkout.create({
+    const session = await stripe.checkout.sessions.create({
         customer_email: req.user.email,
         phone_number_collection:{
             enable:true
@@ -66,7 +66,7 @@ exports.processPayment = catchAsynchErrors(async(req,res,next)=>{
 
 //send strip api key
 
-exports.sendStripeApi= catchAsynchError(async(req,res,next)=>{
+exports.sendStripeApi= catchAsynchErrors(async(req,res,next)=>{
     res.status(200).json({
         stripeApiKey:process.env.STRIPE_API_KEY
     })
