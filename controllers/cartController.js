@@ -13,7 +13,7 @@ async function addItemToCart(req, res) {
 
     const restaurant = await Restaurant.findById(restaurantId);
     if (!restaurant) {
-      return res.status(404).json({ message: "Restaurant not found" });
+      return res.status(404).json({ message: "Restaurant not found." });
     }
 
     let cart = await Cart.findOne({ user: userId });
