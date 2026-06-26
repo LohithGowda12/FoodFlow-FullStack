@@ -6,7 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
     reducer : {
-        // restaurants : restaurantReducer,
+        restaurants : restaurantReducer,
         // menus: menuReducer,
 
     }
