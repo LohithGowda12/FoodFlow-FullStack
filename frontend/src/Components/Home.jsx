@@ -21,8 +21,8 @@ const Home = () => {
     const{
       loading : restaurantsLoading,
       error: restaurantsError,
-      restaurant,showVegOnly
-    } = useSelector((state) => restaurants )
+      restaurants,showVegOnly
+    } = useSelector((state) => state.restaurants )
 
     //
     useEffect(()=>{
@@ -33,10 +33,20 @@ const Home = () => {
       dispatch(getRestaurants(keyword))
     },[dispatch,restaurantsError,keyword])
 
+    const handleSortByRatings = () =>{
+      dispatch(sortByRatings())
+    }
+    const handleSortByReviews =() =>{
+      dispatch(sortByReviews())
+    }
+    const handleToggleVegOnly =() =>{
+      dispatch(toggleVegOnly())
+    }
+
 
   return (
     <>
-      {/* <CountRestaurant /> */}
+      { <CountRestaurant /> }
 
       {restaurantsLoading ? (
         <Loader />

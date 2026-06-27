@@ -100,7 +100,7 @@ export const {
 
     sortByRatings,
     sortByReviews,
-    showVegOnly,
+    toggleVegOnly,
     clearError
 } =restaurantSlice.actions
 
