@@ -51,10 +51,6 @@ const userSlice =createSlice({
             state.loading=false,
             state.isUpdate=action.payload
         },
-        updateSuccess:(state,action)=>{
-            state.loading=false,
-            state.isUpdate=action.payload
-        },
         updateFail:(state,action)=>{
             state.loading=false,
             state.error=action.payload
