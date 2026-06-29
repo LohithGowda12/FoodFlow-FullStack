@@ -25,7 +25,7 @@ export const login =(email,password) => asynch(dispatch) =>{
     }
 }
 
-//signip/register
+//signup/register
 export const register =(userData) => async(dispatch)=>{
     try{
         dispatch(userRequest());
