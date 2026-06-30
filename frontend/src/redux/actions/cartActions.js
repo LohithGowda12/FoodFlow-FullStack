@@ -1,7 +1,7 @@
 //fetch cart
 //add items
 //update quantity
-//remove the items
+//remove items
 // handle loading and errors
 
 import api from "../../utils/api";
