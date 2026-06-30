@@ -69,6 +69,6 @@ const userSlice =createSlice({
 export const{
     userRequest,usersuccess,
     userFail,logoutFail,logoutSuccess,updateFail,updateRequest,updateSuccess,updateReset,clearerror
-}
+} = userSlice.actions
 
 export default userSlice.reducer
